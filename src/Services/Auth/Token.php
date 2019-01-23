@@ -91,7 +91,10 @@ class Token
     public function renewSelf(array $body = [])
     {
         $body = OptionsResolver::resolve($body, ['increment']);
-        $params = ['body' => json_encode($body)];
+        $params = [];
+        if (count($body) > 0) {
+            $params['body'] = json_encode($body);
+        }
         return $this->client->post('/v1/auth/token/renew-self', $params);
     }
 
@@ -109,7 +112,10 @@ class Token
     public function renew(array $body = [])
     {
         $body = OptionsResolver::resolve($body, ['token', 'increment']);
-        $params = ['body' => json_encode($body)];
+        $params = [];
+        if (count($body) > 0) {
+            $params['body'] = json_encode($body);
+        }
         return $this->client->post('/v1/auth/token/renew', $params);
     }
 
